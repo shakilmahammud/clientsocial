@@ -1,0 +1,184 @@
+/* --------- Status ---------- */
+.status{
+    background: white;
+    box-shadow: 0 0 5px #ddd;
+    padding: 20px;
+    border-radius: 5px;
+    border: 1px solid rgb(0, 0, 0, .125);
+}
+.status .statusBtn{
+    background: #f1f1f1;
+    border: none;
+    outline: none;
+    border-radius: 30px;
+    color: #555;
+    padding: 0 10px;
+    text-align: left;
+    margin: 0 5px;
+}
+.status .statusBtn:hover{
+    background: #ddd;
+}
+
+/* ------------Posts ------ */
+.posts .card{
+    box-shadow: 0 0 4px #ddd;
+}
+/* --------- Post Card Header --------- */
+.posts .card_header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    padding: 15px 25px;
+}
+.posts .card_header .card_name{
+    transform: translateY(3px);
+    margin: 0px 0px 0px 10px;
+}
+.posts .card_header .dropdown-menu{
+    position: absolute;
+    right: 0;
+    left: inherit;
+}
+.posts .card_header .dropdown-item{
+    display: flex;
+    margin: 5px 0;
+}
+
+/* ---------- Post Card Body ---------- */
+.posts .card_body-content{
+    padding: 0 25px;
+    margin-top: -10px;
+    margin-bottom: 10px;
+}
+.posts .card_body-content .readMore{
+    color: crimson;
+    cursor: pointer;
+}
+
+/* ---------- Post Card Footer ---------- */
+.posts .card_icon_menu{
+    display: flex;
+    justify-content: space-between;
+    padding: 0 15px;
+    cursor: pointer;
+}
+.posts .card_icon_menu i{
+    font-size: 28px;
+    margin: 10px;
+}
+.posts .card_icon_menu img{
+    width: 28px;
+    height: 28px;
+    transform: translate(5px, -5px);
+    opacity: 0.9;
+}
+/*Story style*/
+.storys{
+    position: relative;
+    padding-top: 20px;
+    background:#fff;
+    width: 100%;
+   
+  }
+  .addStory{
+    background: #fff;
+    box-shadow:0px 0px 10px #000;
+    border-radius: 10px;
+    margin-top: -10px;
+    padding: 2px;
+  }
+  .addStory >.material-icons{
+      margin-top: 20px;
+  }
+  .storyProfile> img{
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translate(-50%,-50%);
+  }
+  .storys .MuiSvgIcon-root{
+    margin-top: 10px;
+    color: #000 !important;
+  }
+  .storys .rightArrow{
+    position: absolute;
+    top: 50%;
+    left: 112%;
+    transform: translate(-50%,-50%);
+  }
+
+/*Leaft side bar icon text buttom */
+.left-bar-icon{
+    margin-left: 10px;
+
+}
+.left-bar-icon li{
+    list-style: none;
+    padding: 5px;
+}
+
+.left-bar-icon .left-sidebar-icon .icons{
+    padding: 10PX;
+    font-size: 40px;
+}
+.left-bar-icon .left-sidebar-icon span{
+    margin-left: 10px;
+    font-size: 18px;
+}
+/*left bar icon color*/
+
+
+
+.text-color-sg {
+    text-align: center;
+    padding: 10px;
+}
+.left-bar-text{
+    color: #000000 !important;
+}
+/*share-post*/
+.likeColor{
+    color: #0f9df0;
+}
+.share-post{
+    color: #3AB4FB;
+    margin-top: 10px;
+    font-size: 40px;
+}
+.comment-icons{
+    color: #3AB4FB;
+    margin-top: 10px;
+    font-size: 40px !important;
+    margin-left: 20px;
+}
+.btn-outline-danger{
+    color: #3AB4FB !important;
+    border-color: #3AB4FB !important;
+}
+.btn-outline-info{
+    color: #3AB4FB !important;
+    border-color: #3AB4FB !important;
+}
+.btn-outline-info:hover{
+    color: #fff !important;
+    border-color: #3AB4FB !important;
+    background-color:#3AB4FB !important;
+}
+.btn-outline-danger:hover{
+    color: #fff !important;
+    border-color: #3AB4FB !important;
+}
+.status_body textarea{
+    width: 100%;
+    height: 100% !important;
+    background-image: linear-gradient(#fff, rgba(58, 180, 251, 0.3)) !important;
+    box-shadow: none;
+    border: none !important;
+}
+.status_body {
+    width: 100%;
+    height: 100% !important;
+    background-image: linear-gradient(rgb(58, 180,251,0.5) , #fff) !important;
+}
