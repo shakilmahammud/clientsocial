@@ -1,17 +1,10 @@
 import React, {useState,useEffect} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { updateUserPass } from '../../redux/actions/profileAction'
+import { useHistory } from "react-router-dom";
 import './Settings.css'
 function Resetpassword() {
-
-    const [allValues , setAllValues] = useState({
-        currentpassword : '',
-        newpassword: '',
-        confirmnewpassword: ''
-    })
-    const changeHandler = e => {
-        setAllValues({...allValues , [e.target.name] : e.target.value })
-    }
+    let history = useHistory();
     const [userData, setUserData] = useState({})
     console.log(userData)
     const { auth, theme } = useSelector(state => state)
@@ -30,19 +23,9 @@ function Resetpassword() {
     return (
         <div>
             <h1>Change Password</h1>
-            <form action="">
-                <input type="text" placeholder="Current Password" onChange={changeHandler}/>
-                <input type="text" placeholder="New Password" onChange={changeHandler}/>
-                <input type="text" placeholder="Confirm new password" onChange={changeHandler}/>
-                <button>Save</button>
-            </form>
             <form onSubmit={handleSubmit}>
-                
-
-              
-
                 <div className="form-group">
-                    <label htmlFor="mobile">Current Password"</label>
+                    <label htmlFor="mobile">Current Password</label>
                     <input type="text" name="password"  placeholder='Current Password'
                     className="form-control" onChange={handleInput} />
                 </div>
@@ -65,6 +48,7 @@ function Resetpassword() {
 
                 <button type="submit">Save</button>
             </form>
+            <button onClick={history.goBack}>Back</button>
         </div>
     )
 }

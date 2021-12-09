@@ -1,4 +1,5 @@
 const Users = require('../models/userModel')
+const bcrypt = require('bcrypt')
 
 const userCtrl = {
     searchUser: async (req, res) => {
@@ -25,10 +26,10 @@ const userCtrl = {
     updateUser: async (req, res) => {
 
         try {
-            const { avatar, fullname, mobile, address, story, website, gender} = req.body
+            const { avatar, fullname, mobile, address, story, website, gender,country} = req.body
             if(!fullname) return res.status(400).json({msg: "Please add your full name."})
             await Users.findOneAndUpdate({_id: req.user._id}, {
-                avatar, fullname, mobile, address, story, website, gender,
+                avatar, fullname, mobile, address, story, website, gender,country
             })
             res.json({msg: "Update Success!"})
 
@@ -39,12 +40,18 @@ const userCtrl = {
     updatePass: async (req, res) => {
 
         try {
+            const { email, password,newPass } = req.body
+            console.log(newPass)
+            const user = await Users.findOne({email})
             console.log(req.body)
-            // if(!fullname) return res.status(400).json({msg: "Please add your full name."})
-            // await Users.findOneAndUpdate({_id: req.user._id}, {
-            //     avatar, fullname, mobile, address, story, website, gender,
-            // })
-            // res.json({msg: "Update Success!"})
+            const isMatch = await bcrypt.compare(password, user.password)
+            if(!isMatch) return res.status(400).json({msg: "Password is incorrect."})
+            const passwordHash = await bcrypt.hash(newPass, 12)
+            await Users.findOneAndUpdate({email}, {
+                password:passwordHash,
+            })
+            res.json({msg: "Update Success!"})
+            
 
         } catch (err) {
             return res.status(500).json({msg: err.message})

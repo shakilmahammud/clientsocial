@@ -65,7 +65,7 @@ const Menu = () => {
                     <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                     <Link className="dropdown-item" to={`/profile/${auth.user._id}`}>Profile</Link>
                     <div className="dropdown-divider"></div>
-                    <Link className="dropdown-item">Settings</Link>
+                    <Link className="dropdown-item" to="/SettingNav">Settings</Link>
                     <div className="dropdown-divider"></div>
                     <Link className="dropdown-item" to="/"
                     onClick={() => dispatch(logout())}>

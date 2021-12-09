@@ -1,77 +1,105 @@
-import  React, {useEffect, useState}  from 'react'
-
+import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import EditProfile from '../profile/EditProfile'
+import { checkImage } from '../../utils/imageUpload'
 import { GLOBALTYPES } from '../../redux/actions/globalTypes'
+import { updateProfileUser } from '../../redux/actions/profileAction'
 import './Settings.css'
 import { Link } from 'react-router-dom'
+import { useHistory } from "react-router-dom";
+
 
 function Settings() {
-    const { profile, auth } = useSelector(state => state)
-    const dispatch = useDispatch()
-    const [onEdit, setOnEdit] = useState(true)
+    let history = useHistory();
+    const initState = {
+        fullname: '', mobile: '', address: '', website: '', story: '', gender: '',country:'',
+    }
+    const [userData, setUserData] = useState(initState)
+    const { fullname, mobile, address, website, story, gender,country} = userData
 
-    
+    const [avatar, setAvatar] = useState('')
+
+    const { auth, theme } = useSelector(state => state)
+    const dispatch = useDispatch()
+
     useEffect(() => {
-        if(onEdit){
-            dispatch({ type: GLOBALTYPES.MODAL, payload: true})
-        }else{
-            dispatch({ type: GLOBALTYPES.MODAL, payload: false})
-        }
-    },[onEdit, dispatch])
-    
-    // const [allValues , setAllValues] = useState({
-    //     username : '',
-    //     email: '',
-    //     phone: '',
-    //     country: '',
-    //     age: ''
-    // })
-    // const changeHandler = e => {
-    //     setAllValues({...allValues , [e.target.name] : e.target.value })
+        setUserData(auth.user)
+    }, [auth.user])
+
+
+    // const changeAvatar = (e) => {
+    //     const file = e.target.files[0]
+
+    //     const err = checkImage(file)
+    //     if(err) return dispatch({
+    //         type: GLOBALTYPES.ALERT, payload: {error: err}
+    //     })
+
+    //     setAvatar(file)
     // }
+
+    const handleInput = e => {
+        const { name, value } = e.target
+        setUserData({ ...userData, [name]:value })
+    }
+
+    const handleSubmit = e => {
+        e.preventDefault()
+        dispatch(updateProfileUser({userData, avatar, auth}))
+    }
     return (
         <div>
-       <button className="btn btn-outline-info"> <Link to={`/profile/${auth.user._id}`}>Profile</Link></button>
-         {
-                            onEdit && <EditProfile setOnEdit={setOnEdit} />
-            }
-            {/* <h1>Edit info</h1>
-            <form action="">
-                <input 
-                type="text"
-                placeholder="Username"
-                onChange= {changeHandler}
-                />
+             <h1>Edit info</h1>
+             <form onSubmit={handleSubmit}>
+               
 
-                <input 
-                type="text"
-                placeholder="Email"
-                onChange= {changeHandler}
-                />
+                <div className="form-group">
+                    <label htmlFor="fullname">Full Name</label>
+                    <div className="position-relative">
+                        <input type="text" className="form-control" id="fullname"
+                        name="fullname" value={fullname} onChange={handleInput}  
+                        placeholder='Full Name'
+                        />
+                        <small className="text-danger position-absolute"
+                        style={{top: '50%', right: '5px', transform: 'translateY(-50%)'}}>
+                            {fullname.length}/25
+                        </small>
+                    </div>
+                </div>
 
-                <input 
-                type="text" 
-                placeholder="Phone"
-                onChange= {changeHandler}
-                />
-                <input 
-                type="text" 
-                placeholder="Country"
-                onChange= {changeHandler}
-                />
-                <input 
-                type="text"
-                placeholder="Age"
-                onChange= {changeHandler}
-                />
-                <select name="Gender" id="">
-                    <option disabled="disabled" selected="selected"  value="">Chose Gender</option>
-                    <option value="Male"></option>
-                    <option value="Female"></option>
-                </select> <br></br>
-                <button>Save</button>
-            </form> */}
+                <div className="form-group">
+                    <label htmlFor="mobile">Mobile</label>
+                    <input type="text" name="mobile" value={mobile}
+                     placeholder='Mobile Number'
+                    className="form-control" onChange={handleInput} />
+                </div>
+
+                <div className="form-group">
+                    <label htmlFor="website">Website</label>
+                    <input type="text" name="website" value={website}
+                     placeholder='Website Name'
+                    className="form-control" onChange={handleInput} />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="country">Contry</label>
+                    <input type="text" name="country" value={country}
+                     placeholder='Country Name'
+                    className="form-control" onChange={handleInput} />
+                </div>
+                <label htmlFor="gender">Gender</label>
+                <div className="input-group-prepend px-0 mb-4">
+                    <select name="gender" id="gender" value={gender}
+                    className="custom-select text-capitalize"
+                    onChange={handleInput}>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <button  type="submit">Save</button>
+                
+            </form>
+            <button onClick={history.goBack}>Back</button>
             
         </div>
     )
